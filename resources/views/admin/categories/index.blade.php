@@ -28,10 +28,10 @@
                 <td>
                     <div class="d-flex">
                         <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-primary">Изменить</a>
-                        <form action="{{ route('admin.categories.destroy', $category) }}" onclick="return confirm('Удалить?') ? true : false" method="POST">
+                        <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger">Удалить</button>
+                            <button class="btn btn-danger" onclick="return confirm('Удалить?') ? true : false">Удалить</button>
                         </form>
                     </div>
                 </td>
