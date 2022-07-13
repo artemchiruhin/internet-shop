@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Главная</a>
+        <a class="navbar-brand" href="{{ route('index') }}">Главная</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">Бургер</span>
         </button>
@@ -26,7 +26,7 @@
                         Панель администратора
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Категории</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.categories.index') }}">Категории</a></li>
                         <li><a class="dropdown-item" href="#">Товары</a></li>
                         <li><a class="dropdown-item" href="#">Заказы</a></li>
                     </ul>
