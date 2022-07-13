@@ -27,7 +27,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ route('admin.categories.index') }}">Категории</a></li>
-                        <li><a class="dropdown-item" href="#">Товары</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.products.index') }}">Товары</a></li>
                         <li><a class="dropdown-item" href="#">Заказы</a></li>
                     </ul>
                 </li>
