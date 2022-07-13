@@ -9,7 +9,7 @@
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Введите название</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Название">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Название" required>
                 @error('name')
                 <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
