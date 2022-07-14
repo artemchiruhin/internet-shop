@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
+
+Route::group(['as' => 'auth.', 'middleware' => ['guest']], function() {
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+});
+
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('auth.logout');
 
 Route::group(['as' => 'admin.', 'prefix' => '/admin'], function () {
     Route::resource('categories', CategoryController::class)->except(['show']);
