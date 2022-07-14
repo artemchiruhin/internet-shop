@@ -16,7 +16,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">Бургер</span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Features</a>
@@ -31,6 +31,24 @@
                         <li><a class="dropdown-item" href="{{ route('admin.orders.index') }}">Заказы</a></li>
                     </ul>
                 </li>
+            </ul>
+            <ul class="navbar-nav">
+                @guest
+                <li class="nav-item">
+                    <a href="{{ route('auth.login') }}" class="nav-link">Вход</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('auth.register') }}" class="nav-link">Регистрация</a>
+                </li>
+                @endguest
+                @auth
+                <li class="nav-item">
+                    <form action="{{ route('auth.logout') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-primary-outline">Выход</button>
+                    </form>
+                </li>
+                @endauth
             </ul>
         </div>
     </div>
