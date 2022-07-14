@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="{{ route('user.profile') }}">Профиль</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,7 +45,7 @@
                 <li class="nav-item">
                     <form action="{{ route('auth.logout') }}" method="POST">
                         @csrf
-                        <button class="btn btn-primary-outline">Выход</button>
+                        <button class="btn btn-outline-primary">Выход</button>
                     </form>
                 </li>
                 @endauth

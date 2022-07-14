@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
+Route::group(['as' => 'user.'], function() {
+    Route::get('/profile', [IndexController::class, 'profile'])->middleware('auth')->name('profile');
+});
+
 Route::group(['as' => 'auth.', 'middleware' => ['guest']], function() {
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
@@ -30,7 +34,7 @@ Route::group(['as' => 'auth.', 'middleware' => ['guest']], function() {
 
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('auth.logout');
 
-Route::group(['as' => 'admin.', 'prefix' => '/admin'], function () {
+Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('products', ProductController::class)->except(['show']);
     Route::group(['as'=> 'orders.', 'prefix' => 'orders'], function() {
