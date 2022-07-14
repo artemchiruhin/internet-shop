@@ -5,31 +5,23 @@
 @section('content')
     <div class="container">
         <h1 class="my-5">Каталог</h1>
+        @if(count($products) > 0)
         <div class="products d-flex justify-content-between flex-wrap">
-            <div class="card col-12 col-md-6 cold-lg-4" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            @foreach($products as $product)
+            <div class="card col-12 col-md-6 cold-lg-4 mb-3" style="width: 18rem;">
+                <img src="{{ asset('/storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <p class="card-text">{{ $product->description }}</p>
+                    <p class="card-text">Категория: <span class="text-primary">{{ $product->category->name }}</span></p>
+                    <p class="card-text">Цена: <span class="text-primary">{{ number_format($product->price, 2, ',', ' ') }} р.</span></p>
+                    <a href="#" class="btn btn-primary d-block mt-auto">Подробнее</a>
                 </div>
             </div>
-            <div class="card col-12 col-md-6 cold-lg-4" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <div class="card col-12 col-md-6 cold-lg-4" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
+            @endforeach
         </div>
+        @else
+        <h4 class="text-center">Товаров пока нет</h4>
+        @endif
     </div>
 @endsection
