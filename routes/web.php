@@ -34,9 +34,11 @@ Route::group(['as' => 'auth.', 'middleware' => ['guest']], function() {
 
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('auth.logout');
 
-Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['auth']], function () {
-    Route::resource('categories', CategoryController::class)->except(['show']);
-    Route::resource('products', ProductController::class)->except(['show']);
+Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['auth', 'admin']], function () {
+    Route::resources([
+        'categories' => CategoryController::class,
+        'products' => ProductController::class
+    ]);
     Route::group(['as'=> 'orders.', 'prefix' => 'orders'], function() {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::patch('/{order}/approve', [OrderController::class, 'approve'])->name('approve');
