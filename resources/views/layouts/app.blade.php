@@ -21,6 +21,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.profile') }}">Профиль</a>
                 </li>
+                @if(auth()->check() && auth()->user()->role === 'admin')
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Панель администратора
@@ -31,6 +32,7 @@
                         <li><a class="dropdown-item" href="{{ route('admin.orders.index') }}">Заказы</a></li>
                     </ul>
                 </li>
+                    @endif
             </ul>
             <ul class="navbar-nav">
                 @guest
