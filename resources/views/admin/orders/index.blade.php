@@ -27,19 +27,25 @@
                     <tr>
                         <th scope="row">{{ $loop->index + 1 }}</th>
                         <td>{{ $order->user->full_name }}</td>
-                        <td>{{ implode(', ', $order->products) }}</td>
-                        <td>{{ array_reduce($order->products, function($sum, $obj) { $sum += $obj->price; }) }} р.</td>
+                        <td>{{ $order->products->pluck('name')->implode(', ') }}</td>
+                        <td>{{ $order->products->pluck('price')->reduce(fn ($carry, $item) => $carry + $item) }} р.</td>
                         <td>{{ $order->approved_at ? 'Подтвержден' : 'Не подтвержден' }}</td>
                         <td>
-                            @if(!is_null($order->approved_at))
                             <div class="d-flex">
+                                @if(is_null($order->approved_at))
                                 <form action="{{ route('admin.orders.approve', $order) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <button class="btn btn-success">Подтвердить</button>
+                                    <button class="btn btn-primary">Подтвердить</button>
+                                </form>
+                                @endif
+                                <form action="{{ route('admin.orders.destroy', $order) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" onclick="return confirm('Удалить?') ? true : false">Удалить</button>
                                 </form>
                             </div>
-                            @endif
+
                         </td>
                     </tr>
                 @endforeach

@@ -42,5 +42,6 @@ Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['auth', '
     Route::group(['as'=> 'orders.', 'prefix' => 'orders'], function() {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::patch('/{order}/approve', [OrderController::class, 'approve'])->name('approve');
+        Route::delete('/{order}', [OrderController::class, 'destroy'])->name('destroy');
     });
 });

@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->get();
+        $products = Product::with('category')->latest()->get();
         return view('index', compact('products'));
     }
 
