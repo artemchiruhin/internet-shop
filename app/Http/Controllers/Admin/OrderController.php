@@ -23,4 +23,10 @@ class OrderController extends Controller
         $order->save();
         return to_route('admin.orders.index')->with('success', 'Заказ был подтвержден');
     }
+
+    public function destroy(Order $order)
+    {
+        $order->delete();
+        return to_route('admin.orders.index')->with('success', 'Заказ был удален');
+    }
 }

@@ -8,7 +8,7 @@
         @if(count($products) > 0)
         <div class="products row">
             @foreach($products as $product)
-            <div class="card col-12 col-xl-3 col-lg-4 col-md-6 mb-3">
+            <div class="card col-12 col-xl-3 col-lg-4 col-md-6 mb-3 p-0">
                 <img src="{{ asset('/storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ $product->name }}</h5>

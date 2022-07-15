@@ -18,4 +18,6 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    protected $dates = ['approved_at'];
 }
