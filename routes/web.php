@@ -34,6 +34,13 @@ Route::group(['as' => 'auth.', 'middleware' => ['guest']], function() {
 
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('auth.logout');
 
+Route::group(['as' => 'verification.', 'prefix' => 'email/verify'], function() {
+    Route::get('/', [IndexController::class, 'verificationMessage'])->middleware('auth')->name('notice');
+    Route::get('/{id}/{hash}', [IndexController::class, 'verifyEmail'])->middleware(['auth', 'signed'])->name('verify');
+});
+
+Route::post('/email/verification-notification', [IndexController::class, 'resendEmailVerificationMessage'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['auth', 'admin']], function () {
     Route::resources([
         'categories' => CategoryController::class,
