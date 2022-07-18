@@ -1,37 +1,29 @@
 @extends('layouts.app')
 
-@section('title', 'Регистрация')
+@section('title', 'Сбросить пароль')
 
 @section('content')
     <div class="container">
-        <div class="row mt-5">
+        <div class="row">
             <div class="col-12 col-md-4 mx-auto">
-                <h1 class="my-5 text-center">Регистрация</h1>
-                <form method="POST" action="{{ route('auth.register') }}">
+                @if(session('status'))
+                    <div class="alert alert-info" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                <h1 class="text-center my-5">Сброс пароля</h1>
+                <form action="{{ route('password.update') }}" method="POST">
                     @csrf
+                    <input type="hidden" value="{{ $token }}" name="token">
                     <div class="mb-3">
-                        <label for="login" class="form-label">Введите логин</label>
-                        <input type="text" value="{{ old('login') }}" class="form-control @error('login') is-invalid @enderror" id="login" name="login" placeholder="Логин" required autofocus>
-                        @error('login')
-                        <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="full_name" class="form-label">Введите ФИО</label>
-                        <input type="text" value="{{ old('full_name') }}" class="form-control @error('full_name') is-invalid @enderror" id="full_name" name="full_name" placeholder="Фамилия Имя Отчество" required>
-                        @error('full_name')
-                        <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Введите email</label>
+                        <label for="email" class="form-label">Введите ваш email</label>
                         <input type="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Эл. адрес" required>
                         @error('email')
                         <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Введите пароль</label>
+                        <label for="password" class="form-label">Введите новый пароль</label>
                         <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Пароль" required>
                         @error('password')
                         <span class="invalid-feedback">{{ $message }}</span>
@@ -44,7 +36,7 @@
                         <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                    <button type="submit" class="btn btn-primary">Сбросить пароль</button>
                 </form>
             </div>
         </div>

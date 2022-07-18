@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,13 @@ Route::group(['as' => 'verification.', 'prefix' => 'email/verify'], function() {
 });
 
 Route::post('/email/verification-notification', [IndexController::class, 'resendEmailVerificationMessage'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::group(['as' => 'password.', 'middleware' => ['guest']], function() {
+    Route::get('/forgot-password', [ResetPasswordController::class, 'forgotPasswordForm'])->name('request');
+    Route::post('/forgot-password', [ResetPasswordController::class, 'sendResetLink'])->name('email');
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetPasswordForm'])->name('reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('update');
+});
 
 Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['auth', 'admin']], function () {
     Route::resources([
