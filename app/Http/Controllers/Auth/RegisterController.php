@@ -19,8 +19,13 @@ class RegisterController extends Controller
     {
         $validated = $request->validated();
         $user = User::create($validated);
-        event(new Registered($user));
-        auth()->login($user);
-        return to_route('verification.notice');
+        try {
+            event(new Registered($user));
+            auth()->login($user);
+            return to_route('verification.notice');
+        } catch (\Exception $e) {
+            auth()->login($user);
+            return to_route('index');
+        }
     }
 }

@@ -28,6 +28,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Войти</button>
                 </form>
+                <a href="{{ route('password.request') }}" class="text-primary text-decoration-none">Забыли пароль?</a>
             </div>
         </div>
     </div>
