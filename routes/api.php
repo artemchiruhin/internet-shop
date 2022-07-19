@@ -17,14 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResources([
-    'categories' => CategoryController::class,
-    'products' => ProductController::class
-]);
+Route::group(['as' => 'api.'], function() {
+    Route::apiResources([
+        'categories' => CategoryController::class,
+        'products' => ProductController::class
+    ]);
 
-Route::group(['prefix' => 'orders'], function() {
-    Route::get('/', [OrderController::class, 'index']);
-    Route::get('/{order}', [OrderController::class, 'show']);
-    Route::patch('/{order}/approve', [OrderController::class, 'approve']);
-    Route::delete('/{order}', [OrderController::class, 'destroy']);
+    Route::group(['prefix' => 'orders', 'as' => 'orders.'], function() {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/{order}', [OrderController::class, 'show'])->name('show');
+        Route::patch('/{order}/approve', [OrderController::class, 'approve'])->name('approve');
+        Route::delete('/{order}', [OrderController::class, 'destroy'])->name('destroy');
+    });
 });
