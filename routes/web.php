@@ -24,6 +24,9 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::group(['as' => 'user.'], function() {
     Route::get('/profile', [IndexController::class, 'profile'])->middleware('auth')->name('profile');
+    Route::group(['as' => 'products.', 'prefix' => 'products'], function() {
+        Route::get('/{product}', [\App\Http\Controllers\User\ProductController::class, 'show'])->name('show');
+    });
 });
 
 Route::group(['as' => 'auth.', 'middleware' => ['guest']], function() {
