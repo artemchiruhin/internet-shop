@@ -15,7 +15,7 @@
                     <p class="card-text">{{ $product->description }}</p>
                     <p class="card-text">Категория: <span class="text-primary">{{ $product->category->name }}</span></p>
                     <p class="card-text">Цена: <span class="text-primary">{{ number_format($product->price, 2, ',', ' ') }} р.</span></p>
-                    <a href="#" class="btn btn-primary d-block mt-auto">Подробнее</a>
+                    <a href="{{ route('user.products.show', $product) }}" class="btn btn-primary d-block mt-auto">Подробнее</a>
                 </div>
             </div>
             @endforeach
