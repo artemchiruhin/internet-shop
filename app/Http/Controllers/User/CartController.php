@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,6 @@ class CartController extends Controller
         ]);
         $order->products()->attach(session('cart'));
         session()->forget('cart');
-        return redirect(route('cart.index'));
+        return to_route('user.cart.index');
     }
 }
