@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendVerificationEmailJob;
 use App\Models\Product;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class IndexController extends Controller
 
     public function resendEmailVerificationMessage(Request $request)
     {
-        $request->user()->sendEmailVerificationNotification();
+        SendVerificationEmailJob::dispatch($request->user());
         return back()->with('message', 'Ссылка была отправлена!');
     }
 }
