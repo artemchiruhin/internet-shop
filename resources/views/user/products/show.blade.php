@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-12 col-md-4">
-                <img src="{{ asset('/storage/' . $product->image) }}" alt="{{ $product->name }}" style="width: 100%;">
+                <img src="{{ get_image_path($product->image) }}" alt="{{ $product->name }}" style="width: 100%;">
             </div>
             <div class="col-12 col-md-8">
                 <h4 class="text-primary">{{ $product->name }}</h4>
