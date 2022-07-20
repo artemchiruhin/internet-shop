@@ -23,6 +23,12 @@
                     <a class="nav-link" href="{{ route('user.profile') }}">Профиль</a>
                 </li>
                 @endauth
+                <li class="nav-item position-relative">
+                    <a class="nav-link" href="{{ route('user.cart.index') }}">Корзина</a>
+                    <span class="position-absolute start-100 translate-middle badge rounded-pill bg-primary" style="top: 5px">
+                        {{ count(session('cart') ?? []) }}
+                    </span>
+                </li>
                 @if(auth()->check() && auth()->user()->role === 'admin')
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
