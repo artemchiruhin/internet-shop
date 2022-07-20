@@ -27,12 +27,12 @@ Route::group(['as' => 'user.'], function() {
     Route::get('/profile', [IndexController::class, 'profile'])->middleware('auth')->name('profile');
     Route::group(['as' => 'products.', 'prefix' => 'products'], function() {
         Route::get('/{product}', [\App\Http\Controllers\User\ProductController::class, 'show'])->name('show');
-        Route::post('/products/{product}/add-to-cart', [\App\Http\Controllers\User\ProductController::class, 'addProductToCart'])->middleware('auth')->name('addToCart');
-        Route::post('/products/{product}/remove-from-cart', [\App\Http\Controllers\User\ProductController::class, 'removeProductFromCart'])->middleware('auth')->name('removeFromCart');
+        Route::post('/products/{product}/add-to-cart', [\App\Http\Controllers\User\ProductController::class, 'addProductToCart'])->name('addToCart');
+        Route::post('/products/{product}/remove-from-cart', [\App\Http\Controllers\User\ProductController::class, 'removeProductFromCart'])->name('removeFromCart');
     });
     Route::group(['as' => 'cart.'], function() {
         Route::get('/cart', [CartController::class, 'index'])->name('index');
-        Route::post('/cart/make-order', [CartController::class, 'makeOrder'])->name('makeOrder');
+        Route::post('/cart/make-order', [CartController::class, 'makeOrder'])->middleware('auth')->name('makeOrder');
     });
 });
 
