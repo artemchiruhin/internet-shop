@@ -27,7 +27,7 @@
                     <tr>
                         <th scope="row">{{ $loop->index + 1 }}</th>
                         <td>{{ $order->user->full_name }}</td>
-                        <td>{{ $order->products->pluck('name')->implode(', ') }}</td>
+                        <td>@foreach($order->products as $product) <a href="{{ route('user.products.show', $product) }}">{{ $product->name }}</a>, @endforeach</td>
                         <td>{{ $order->products->pluck('price')->reduce(fn ($carry, $item) => $carry + $item) }} р.</td>
                         <td>{{ $order->approved_at ? 'Подтвержден' : 'Не подтвержден' }}</td>
                         <td>
