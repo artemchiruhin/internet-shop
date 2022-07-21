@@ -41,6 +41,7 @@ Route::group(['as' => 'auth.', 'middleware' => ['guest']], function() {
     Route::post('/register', [RegisterController::class, 'store']);
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
+    Route::post('/login-admin', [LoginController::class, 'loginAdmin'])->name('loginAdmin');
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('auth.logout');
