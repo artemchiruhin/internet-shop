@@ -28,6 +28,12 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Войти</button>
                 </form>
+                @env('develop')
+                <form action="{{ route('auth.loginAdmin') }}" method="POST" class="mt-1">
+                    @csrf
+                    <button class="btn btn-outline-primary">Войти как админ</button>
+                </form>
+                @endenv
                 <a href="{{ route('password.request') }}" class="text-primary text-decoration-none">Забыли пароль?</a>
             </div>
         </div>
