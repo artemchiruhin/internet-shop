@@ -42,7 +42,7 @@
             </div>
             <div class="mb-3">
                 <p>Текущее изображение</p>
-                <img src="{{ $product->image ? asset('/storage/' . $product->image) : 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483097.jpg' }}" alt="{{ $product->name }}" width="200">
+                <img src="{{ get_image_path($product->image) }}" alt="{{ $product->name }}" width="200">
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Выберите изображение (необязательно)</label>

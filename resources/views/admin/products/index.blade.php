@@ -34,7 +34,7 @@
                             <td>{{ $product->category->name }}</td>
                             <td>{{ number_format($product->price, 2, ',', ' ') }} р.</td>
                             <td>
-                                <img src="{{ $product->image ? asset('/storage/' . $product->image) : 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483097.jpg' }}" alt="{{ $product->name }}" width="200">
+                                <img src="{{ get_image_path($product->image) }}" alt="{{ $product->name }}" width="200">
                             </td>
                             <td>
                                 <div class="d-flex">
