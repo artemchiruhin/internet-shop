@@ -15,4 +15,16 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function() {
+            cache()->forget('products');
+        });
+        static::deleting(function() {
+            cache()->forget('products');
+        });
+    }
 }

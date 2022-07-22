@@ -15,4 +15,16 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function() {
+            cache()->forget('categories');
+        });
+        static::deleting(function() {
+            cache()->forget('categories');
+        });
+    }
 }
