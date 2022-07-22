@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('user', 'products')->get();
+        $orders = cache()->remember('orders', 60*60*24, fn () => Order::with('user', 'products')->get());
         return view('admin.orders.index', compact('orders'));
     }
 

@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = cache()->remember('categories', 60*60*24, fn () => Category::all());
         return view('admin.categories.index', compact('categories'));
     }
 

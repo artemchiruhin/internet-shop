@@ -21,4 +21,16 @@ class Order extends Model
     }
 
     protected $dates = ['approved_at'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function() {
+            cache()->forget('orders');
+        });
+        static::deleting(function() {
+            cache()->forget('orders');
+        });
+    }
 }
