@@ -11,7 +11,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->latest()->get();
+        $products = cache()->remember('products', 60*60*24, fn() => Product::with('category')->latest()->get());
         return view('index', compact('products'));
     }
 
