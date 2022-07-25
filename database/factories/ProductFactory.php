@@ -21,7 +21,7 @@ class ProductFactory extends Factory
         return [
             'name' => implode(' ', fake()->unique()->words(5)),
             'description' => fake()->text(),
-            'price' => fake()->randomFloat(2, 2000),
+            'price' => fake()->randomFloat(2, 1, 2000),
             'image' => null,
             'category_id' => $category->id
         ];
