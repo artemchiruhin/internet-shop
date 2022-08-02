@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js" defer></script>
+    @livewireStyles
     <title>@yield('title')</title>
 </head>
 <body>
@@ -64,5 +65,7 @@
     </div>
 </nav>
 @yield('content')
+
+@livewireScripts
 </body>
 </html>
