@@ -14,6 +14,7 @@ class GetPostsCommand extends Command
 
     public function handle()
     {
+        Post::truncate();
         $response = Http::get('https://jsonplaceholder.typicode.com/posts');
         $posts = $response->json();
         $this->withProgressBar($posts, function($post) {
