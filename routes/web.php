@@ -30,6 +30,9 @@ Route::group(['as' => 'user.'], function() {
         Route::post('/products/{product}/add-to-cart', [\App\Http\Controllers\User\ProductController::class, 'addProductToCart'])->name('addToCart');
         Route::post('/products/{product}/remove-from-cart', [\App\Http\Controllers\User\ProductController::class, 'removeProductFromCart'])->name('removeFromCart');
     });
+    Route::group(['as' => 'posts.', 'prefix' => 'posts'], function() {
+        Route::get('/', [\App\Http\Controllers\User\PostController::class, 'index'])->name('index');
+    });
     Route::group(['as' => 'cart.'], function() {
         Route::get('/cart', [CartController::class, 'index'])->name('index');
         Route::post('/cart/make-order', [CartController::class, 'makeOrder'])->middleware('auth')->name('makeOrder');
