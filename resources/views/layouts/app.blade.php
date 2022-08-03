@@ -24,6 +24,9 @@
                     <a class="nav-link" href="{{ route('user.profile') }}">Профиль</a>
                 </li>
                 @endauth
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.posts.index') }}">Посты</a>
+                </li>
                 <li class="nav-item position-relative">
                     <a class="nav-link" href="{{ route('user.cart.index') }}">Корзина</a>
                     <span class="position-absolute start-100 translate-middle badge rounded-pill bg-primary" style="top: 5px">
