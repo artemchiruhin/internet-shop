@@ -15,10 +15,10 @@ class IndexPage extends Component
 
     public function mount()
     {
-        $this->productsForComparsion = [];
+        $this->productsForComparsion = session('productsForComparsion') ?? [];
         $this->showModal(false);
-        $this->firstProductForComparsion = null;
-        $this->secondProductForComparsion = null;
+        $this->firstProductForComparsion = $this->getProduct(0) ?? null;
+        $this->secondProductForComparsion = $this->getProduct(1) ?? null;
     }
 
     public function render()
@@ -35,6 +35,7 @@ class IndexPage extends Component
             return;
         }
         $this->productsForComparsion[] = $id;
+        session()->put('productsForComparsion', $this->productsForComparsion);
         $this->setProductsForComparsion();
     }
 
@@ -43,6 +44,7 @@ class IndexPage extends Component
         $index = array_search($id, $this->productsForComparsion);
         unset($this->productsForComparsion[$index]);
         $this->productsForComparsion = array_values($this->productsForComparsion);
+        session()->put('productsForComparsion', $this->productsForComparsion);
         $this->setProductsForComparsion();
         $this->showModal(true);
     }
@@ -63,30 +65,6 @@ class IndexPage extends Component
         return array_key_exists($index, $this->productsForComparsion) ? Product::find($this->productsForComparsion[$index]) : null;
     }
 
-    /*public function nextFirstProduct($index)
-    {
-        $this->firstProductForComparsion = $this->getProduct($index);
-        $this->showModal(true);
-    }
-
-    public function prevFirstProduct($index)
-    {
-        $this->firstProductForComparsion = $this->getProduct($index);
-        $this->showModal(true);
-    }
-
-    public function nextSecondProduct($index)
-    {
-        $this->secondProductForComparsion = $this->getProduct($index);
-        $this->showModal(true);
-    }
-
-    public function prevSecondProduct($index)
-    {
-        $this->secondProductForComparsion = $this->getProduct($index);
-        $this->showModal(true);
-    }*/
-
     public function changeFirstProductForComparsion($index)
     {
         $this->firstProductForComparsion = $this->getProduct($index);
@@ -98,8 +76,6 @@ class IndexPage extends Component
         $this->secondProductForComparsion = $this->getProduct($index);
         $this->showModal(true);
     }
-
-
 
     protected function showModal($show)
     {
