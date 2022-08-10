@@ -14,14 +14,15 @@ class GetPostsCommand extends Command
 
     public function handle()
     {
-        Post::truncate();
         $response = Http::get('https://jsonplaceholder.typicode.com/posts');
-        $posts = $response->json();
-        $this->withProgressBar($posts, function($post) {
-            Post::create(['title' => $post['title'], 'description' => $post['body']]);
-        });
-        $this->newLine();
-        $this->info('Посты были добавлены');
+        $data = $response->json();
+        $posts = Post::all()->pluck('title');
+        foreach ($data as $item) {
+            if(!$posts->contains($item['title'])) {
+                Post::create(['title' => $item['title'], 'description' => $item['body']]);
+            }
+        }
+        $this->info('Посты синхронизированы');
         return 0;
     }
 }
