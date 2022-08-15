@@ -14,6 +14,7 @@ class GetPostsCommand extends Command
 
     public function handle()
     {
+        $start = now();
         $response = Http::get('https://jsonplaceholder.typicode.com/posts');
         $data = $response->json();
         $posts = Post::all()->pluck('title');
@@ -22,7 +23,8 @@ class GetPostsCommand extends Command
                 Post::create(['title' => $item['title'], 'description' => $item['body']]);
             }
         }
-        $this->info('Посты синхронизированы');
+        $time = $start->diffInSeconds(now());
+        $this->info("Посты синхронизированы ($time сек.)");
         return 0;
     }
 }
